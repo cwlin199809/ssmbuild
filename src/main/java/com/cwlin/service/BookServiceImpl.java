@@ -2,6 +2,7 @@ package com.cwlin.service;
 
 import com.cwlin.dao.BookMapper;
 import com.cwlin.pojo.Books;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
