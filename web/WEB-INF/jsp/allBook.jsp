@@ -18,6 +18,13 @@
                 </h1>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4 column">
+                <%--toAddBook--%>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/addBook">新增书籍</a>
+            </div>
+        </div>
     </div>
 
     <div class="row clearfix">

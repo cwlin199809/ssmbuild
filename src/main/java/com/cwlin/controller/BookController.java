@@ -2,6 +2,7 @@ package com.cwlin.controller;
 
 import com.cwlin.pojo.Books;
 import com.cwlin.service.BookService;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -25,4 +26,17 @@ public class BookController {
         model.addAttribute("list", books);
         return "allBook";
     }
+
+    //跳转到增加书籍页面
+    @RequestMapping("/addBook")
+    public String toAddBook(){
+        return "addBook";
+    }
+
+    //添加书籍的请求
+    public String addBook(Books books){
+        System.out.println("insertBook => "+books);
+        bookService.insertBook(books);
+    }
+    return "sss";
 }
