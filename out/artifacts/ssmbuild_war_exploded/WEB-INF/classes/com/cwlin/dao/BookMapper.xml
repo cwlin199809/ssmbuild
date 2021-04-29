@@ -22,6 +22,10 @@
         select * from ssmbuild.books where bookID = #{bookID}
     </select>
 
+    <select id="selectBookByName" resultType="Books">
+        select * from ssmbuild.books where bookName like concat('%',#{bookName},'%') #模糊查询
+    </select>
+
     <select id="selectAllBooks" resultType="Books">
         select * from ssmbuild.books
     </select>

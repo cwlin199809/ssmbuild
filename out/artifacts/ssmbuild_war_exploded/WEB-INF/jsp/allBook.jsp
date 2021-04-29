@@ -21,8 +21,18 @@
 
         <div class="row">
             <div class="col-md-4 column">
-                <%--toAddBook--%>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/addBook">新增书籍</a>
+                <%--新增书籍 / 显示全部书籍--%>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/toInsertBook">新增书籍</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/allBook">显示全部书籍</a>
+            </div>
+            <div class="col-md-pull-4 column" style="float: right">
+                <%--查询书籍--%>
+                <form action="${pageContext.request.contextPath}/book/selectBook" method="post" class="form-inline">
+                    <span style="color: red; font-weight: bold">${error}</span>
+                    <input type="text" name="selectBookName" class="form-control" id="bookName" placeholder="请输入要查询的书籍名称">
+                    <input type="submit" value="Search" class="btn btn-primary">
+                </form>
+
             </div>
         </div>
     </div>
@@ -44,15 +54,30 @@
                 <%-- 表格内容 --%>
                 <%--书籍从数据库中查询得到，并从这个list中遍历: foreach--%>
                 <tbody>
-                    <c:forEach var="book" items="${list}">
-                        <tr>
-                            <td>${book.bookID}</td>
-                            <td>${book.bookName}</td>
-                            <td>${book.bookCounts}</td>
-                            <td>${book.detail}</td>
-                            <td><a href="">修改</a>|<a href="">删除</a></td>
-                        </tr>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${not empty error}">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: red; font-weight: bold">
+                                    ${error}
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="book" items="${list}">
+                                <tr>
+                                    <td>${book.bookID}</td>
+                                    <td>${book.bookName}</td>
+                                    <td>${book.bookCounts}</td>
+                                    <td>${book.detail}</td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/book/toUpdateBook?id=${book.bookID}">修改</a>
+                                        &nbsp;|&nbsp;
+                                        <a href="${pageContext.request.contextPath}/book/deleteBook/${book.getBookID()}">删除</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                </c:choose>
                 </tbody>
             </table>
         </div>

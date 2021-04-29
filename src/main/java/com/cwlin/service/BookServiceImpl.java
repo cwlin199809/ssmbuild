@@ -35,6 +35,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Books> selectBookByName(String name) {
+        return bookMapper.selectBookByName(name);
+    }
+
+    @Override
     public List<Books> selectAllBooks() {
         return bookMapper.selectAllBooks();
     }

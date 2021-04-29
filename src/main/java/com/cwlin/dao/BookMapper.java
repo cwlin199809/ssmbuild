@@ -15,8 +15,11 @@ public interface BookMapper {
     //更新一本书
     int updateBook(Books books);
 
-    //查询一本书
+    //根据ID查询一本书
     Books selectBookById(@Param("bookID") int id);
+
+    //根据名称查询一本书
+    List<Books> selectBookByName(@Param("bookName") String name);
 
     //查询全部书
     List<Books> selectAllBooks();
