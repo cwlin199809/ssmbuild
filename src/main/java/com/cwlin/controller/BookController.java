@@ -28,7 +28,7 @@ public class BookController {
         return "allBook";
     }
 
-    //跳转到增加书籍页面
+    //跳转到添加书籍页面
     @RequestMapping("/toInsertBook")
     public String toInsertBook(){
         return "insertBook";
@@ -56,7 +56,7 @@ public class BookController {
         return "redirect:/book/allBook"; //重定向
     }
 
-    //修改书籍的请求
+    //删除书籍的请求
     @RequestMapping("deleteBook/{bookId}")
     public String deleteBook(@PathVariable("bookId")int id){
         System.out.println("deleteBook => "+id);
@@ -68,11 +68,14 @@ public class BookController {
     @RequestMapping("selectBook")
     public String selectBook(Model model, String selectBookName){
         System.out.println("selectBook => "+selectBookName);
+        //调用查询方法
         List<Books> books = bookService.selectBookByName(selectBookName);
+        //判断是否查询到内容
         if(books.isEmpty()){
             model.addAttribute("error","未查询到书籍");
             return "allBook";
         }
+        //添加数据
         model.addAttribute("list", books);
         return "allBook";
     }
